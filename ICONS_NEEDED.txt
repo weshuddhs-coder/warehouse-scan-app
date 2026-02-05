@@ -1,0 +1,17 @@
+PLACEHOLDER FOR APP ICONS
+
+You need two icon files:
+- icon-192.png (192x192 pixels)
+- icon-512.png (512x512 pixels)
+
+How to create them:
+1. Go to https://favicon.io/favicon-generator/
+2. Create an icon with "📦" emoji or "WS" text
+3. Download the generated icons
+4. Rename them to icon-192.png and icon-512.png
+5. Upload to this /public folder on GitHub
+
+OR use this quick tool:
+https://www.favicon-generator.org/
+
+For now, the app will work without icons, but won't have a nice home screen icon on mobile.
