@@ -3,8 +3,14 @@ import { Html5Qrcode } from 'html5-qrcode'
 
 export default function BarcodeScanner({ onScan, isActive }) {
   const html5QrCodeRef = useRef(null)
-  const [lastScanned, setLastScanned] = useState(null)
+  const lastScannedRef = useRef(null)
+  const onScanRef = useRef(onScan)
   const [error, setError] = useState(null)
+
+  // Keep onScan ref current without retriggering the camera effect
+  useEffect(() => {
+    onScanRef.current = onScan
+  }, [onScan])
 
   useEffect(() => {
     if (!isActive) return
@@ -12,8 +18,8 @@ export default function BarcodeScanner({ onScan, isActive }) {
     const html5QrCode = new Html5Qrcode("reader")
     html5QrCodeRef.current = html5QrCode
 
-    const config = { 
-      fps: 10, 
+    const config = {
+      fps: 10,
       qrbox: { width: 250, height: 250 },
       aspectRatio: 1.0
     }
@@ -22,20 +28,18 @@ export default function BarcodeScanner({ onScan, isActive }) {
       { facingMode: "environment" },
       config,
       (decodedText) => {
-        // Prevent duplicate scans within 1 second
-        if (decodedText === lastScanned) return
-        
-        setLastScanned(decodedText)
-        onScan(decodedText)
-        
-        // Re-arm scanner after 1 second
-        setTimeout(() => setLastScanned(null), 1000)
+        if (decodedText === lastScannedRef.current) return
+
+        lastScannedRef.current = decodedText
+        onScanRef.current(decodedText)
+
+        setTimeout(() => { lastScannedRef.current = null }, 1000)
       },
-      (errorMessage) => {
-        // Ignore continuous scan errors (too verbose)
+      () => {
+        // Ignore continuous scan errors
       }
     ).catch(err => {
-      setError("📷 Camera access denied. Please enable camera permissions.")
+      setError("Camera access denied. Please enable camera permissions.")
       console.error(err)
     })
 
@@ -44,7 +48,7 @@ export default function BarcodeScanner({ onScan, isActive }) {
         html5QrCodeRef.current.stop().catch(console.error)
       }
     }
-  }, [isActive, lastScanned, onScan])
+  }, [isActive])
 
   return (
     <div className="relative">
