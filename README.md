@@ -92,18 +92,25 @@ VITE_SUPABASE_ANON_KEY=eyJhbGc...
 ```
 warehouse-scan-app/
 ├── public/
-│   └── manifest.json       # PWA configuration
+│   └── manifest.json                   # PWA configuration
 ├── src/
 │   ├── components/
-│   │   └── BarcodeScanner.jsx
+│   │   ├── BarcodeScanner.jsx          # Camera scanner
+│   │   └── ScanPage.jsx               # Shared scan UI
 │   ├── lib/
-│   │   └── supabase.js     # Supabase client
+│   │   └── supabase.js                # Supabase client
 │   ├── pages/
-│   │   ├── ScanReady.jsx
-│   │   └── ScanPickedUp.jsx
-│   ├── App.jsx             # Routes
-│   ├── main.jsx            # Entry point
-│   └── index.css           # Tailwind styles
+│   │   ├── ScanReady.jsx              # READY config
+│   │   └── ScanPickedUp.jsx           # PICKED UP config
+│   ├── App.jsx                         # Routes
+│   ├── main.jsx                        # Entry point
+│   └── index.css                       # Tailwind styles
+├── supabase/functions/
+│   ├── warehouse_get_counts/           # Dashboard counts
+│   ├── warehouse_scan_ready/           # Mark parcel READY
+│   ├── warehouse_scan_picked_up/       # Mark PICKED UP
+│   └── warehouse_recent_scans/         # Recent scan history
+├── migration_fix_critical_gaps.sql     # Database schema
 ├── index.html
 ├── package.json
 └── README.md
