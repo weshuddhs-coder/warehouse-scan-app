@@ -171,35 +171,38 @@ ready_today | picked_up_today | created_not_ready | ready_not_picked
 
 ## Part 6: Deploy Supabase Edge Functions
 
-### Step 6.1: Update warehouse_scan_ready
+All edge function source files are in the `supabase/functions/` folder of this repo.
+
+### Step 6.1: Deploy warehouse_scan_ready
 
 1. In Supabase Dashboard → **Edge Functions**
-2. Find or create `warehouse_scan_ready`
-3. Click **Edit**
-4. Delete everything in the editor
-5. Open `improved_warehouse_scan_ready.ts` from this folder
-6. Copy all contents
-7. Paste into Supabase editor
-8. Click **Deploy**
+2. Click **New Function** (or find existing `warehouse_scan_ready`)
+3. Name: `warehouse_scan_ready`
+4. Open `supabase/functions/warehouse_scan_ready/index.ts` from this repo
+5. Copy all contents
+6. Paste into Supabase editor
+7. Click **Deploy**
 
-### Step 6.2: Update warehouse_scan_picked_up
+### Step 6.2: Deploy warehouse_scan_picked_up
 
 1. Same process as above
-2. Use `improved_warehouse_scan_picked_up.ts` file
-3. Deploy
+2. Name: `warehouse_scan_picked_up`
+3. Use `supabase/functions/warehouse_scan_picked_up/index.ts`
+4. Deploy
 
-### Step 6.3: Create warehouse_recent_scans
+### Step 6.3: Deploy warehouse_recent_scans
 
 1. Click **New Function**
 2. Name: `warehouse_recent_scans`
-3. Copy contents from `warehouse_recent_scans.ts`
+3. Copy contents from `supabase/functions/warehouse_recent_scans/index.ts`
 4. Paste and Deploy
 
-### Step 6.4: Verify warehouse_get_counts
+### Step 6.4: Deploy warehouse_get_counts
 
-1. Check if `warehouse_get_counts` function exists
-2. If yes, you're done!
-3. If no, create it from `warehouse_get_counts.zip`
+1. Click **New Function**
+2. Name: `warehouse_get_counts`
+3. Copy contents from `supabase/functions/warehouse_get_counts/index.ts`
+4. Paste and Deploy
 
 ---
 
